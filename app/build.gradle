@@ -36,6 +36,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.andrognito.flashbar:flashbar:1.0.2'
+    implementation 'com.airbnb.android:lottie:3.4.0'
 }
 
 
@@ -73,3 +74,9 @@ sceneform.asset('sampleData/room.obj',
         'default',
         'sampleData/room.sfa',
         'src/main/assets/room')
+
+
+sceneform.asset('sampleData/greyishsofa.obj',
+        'default',
+        'sampleData/greyishsofa.sfa',
+        'src/main/assets/greyishsofa')

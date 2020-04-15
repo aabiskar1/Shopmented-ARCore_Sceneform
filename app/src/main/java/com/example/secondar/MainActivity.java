@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.ar.core.Anchor;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.HitTestResult;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> namesPath = new ArrayList<>();
     private ArrayList<String> modelNames = new ArrayList<>();
     AnchorNode anchorNode;
-    private Button btnRemove;
+    private LottieAnimationView btnRemove;
     private ArrayList<Anchor> anchorList = new ArrayList<>();
 
     @Override
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
-        btnRemove = (Button) findViewById(R.id.remove);
+        btnRemove = findViewById(R.id.remove);
         getImages();
 
         arFragment.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
@@ -74,18 +75,26 @@ public class MainActivity extends AppCompatActivity {
         imagesPath.add(R.drawable.odltv);
         imagesPath.add(R.drawable.clothdryer);
         imagesPath.add(R.drawable.chair);
+
+        imagesPath.add(R.drawable.greyishsofa);
+
         namesPath.add("Table");
         namesPath.add("BookShelf");
         namesPath.add("Lamp");
         namesPath.add("Old Tv");
         namesPath.add("Cloth Dryer");
         namesPath.add("Chair");
+
+        namesPath.add("Greyish Sofa");
+
         modelNames.add("table.sfb");
         modelNames.add("model.sfb");
         modelNames.add("lamp.sfb");
         modelNames.add("tv.sfb");
         modelNames.add("cloth.sfb");
         modelNames.add("chair.sfb");
+
+        modelNames.add("greyishsofa.sfb");
 
         initaiteRecyclerview();
     }

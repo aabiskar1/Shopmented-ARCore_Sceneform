@@ -1,6 +1,8 @@
 package com.example.secondar;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -61,7 +63,9 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
                         .listenBarTaps(new Flashbar.OnTapListener() {
                             @Override
                             public void onTap(Flashbar flashbar) {
-                                openInShopemneted(context,"com.aabiskar.shopmented",String.valueOf(modelNames.get(position)));
+                                String s = modelNames.get(position);
+
+                                openInShopemneted(context,"com.aabiskar.shopmented",String.valueOf( s.substring(0, s.length() - 4)));
                             }
                         })
                         .build().show();
@@ -89,13 +93,30 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 
 
     public void openInShopemneted(Context context, String packageName,String modelName) {
-        Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
-        if (intent == null) {
-            // Bring user to the market or let them choose an app?
-            intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse("market://details?id=" + packageName));
-        }
+
+
+        Intent intent = new Intent(Intent.ACTION_MAIN, null);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        final ComponentName cn = new ComponentName("com.aabiskar.shopmented", "com.aabiskar.shopmented.RouterActivity");
+        intent.setComponent(cn);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("message",modelName);
-        context.startActivity(intent);
+        try
+        {
+            context.startActivity(intent);
+        }catch(ActivityNotFoundException e){
+            Toast.makeText(context,"Activity Not Found",Toast.LENGTH_SHORT).show();
+        }
+
+//
+//
+//        Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+//        if (intent == null) {
+//            // Bring user to the market or let them choose an app?
+//            intent = new Intent(Intent.ACTION_VIEW);
+//            intent.setData(Uri.parse("market://details?id=" + packageName));
+//        }
+//        intent.putExtra("message",modelName);
+//        context.startActivity(intent);
     }
 }
